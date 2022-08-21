@@ -3,7 +3,7 @@ import * as Element from './Element.js';
 export const Habit = (isEditing, title) =>
   isEditing ? Element.Input(title) : Element.Title(title);
 
-export const HabitDetail = habitDetail => {
+export const HabitOptions = habitDetail => {
   const detailToArray = Object.entries(habitDetail);
   return detailToArray.reduce(
     (detailTemplate, [detailKey, detailValue]) =>
@@ -19,7 +19,8 @@ export const CalendarItem = date => {
   </div>`;
 };
 
-export const Calendar = (challengePeriod, month, date) => {
+export const Calendar = (challengePeriod, firstDate) => {
+  const [_, month, date] = firstDate.split('/').map(Number);
   const calendarItems = Array.from({ length: challengePeriod }, (_, i) => {
     return CalendarItem(`${month}/${date + i}`);
   });
@@ -30,6 +31,6 @@ export const Calendar = (challengePeriod, month, date) => {
   );
 };
 
-export const CheckButton = (text) => {
+export const CheckButton = text => {
   return Element.Button(text);
-}
+};

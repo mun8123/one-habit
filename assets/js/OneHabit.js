@@ -1,25 +1,23 @@
 import * as Component from './Component.js';
-import { todayInfo } from './date.js';
+import Store from './Store.js';
+import { BUTTON_TEXT } from './constant.js';
 
 export default class OneHabit {
   constructor() {
     this.App = document.querySelector('#App');
+    this.store = new Store();
     this.isEditing = false;
-    this.habit = '출근도장';
-    this.habitDetail = {
-      time: '8:00',
-    };
-    this.challengePeriod = 3;
-
+    this.habit = this.store.data;
     this.render();
   }
 
   pageTemplate = () => {
+    const { title, detail, challengePeriod } = this.habit;
     return (
-      Component.Habit(this.isEditing, this.habit) +
-      Component.HabitDetail(this.habitDetail) +
-      Component.Calendar(this.challengePeriod, todayInfo.month, todayInfo.date) +
-      Component.CheckButton('성공')
+      Component.Habit(this.isEditing, title) +
+      Component.HabitOptions(detail.options) +
+      Component.Calendar(challengePeriod, detail.startDate) +
+      Component.CheckButton(BUTTON_TEXT.checkButton)
     );
   };
 
