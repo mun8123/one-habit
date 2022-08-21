@@ -1,7 +1,7 @@
 import * as Element from './Element.js';
 
-export const Habit = (isEditing, title) =>
-  isEditing ? Element.Input(title) : Element.Title(title);
+export const Habit = (title, placeholder = '', isEditing = false) =>
+  isEditing ? Element.Input(title, placeholder) : Element.Title(title);
 
 export const HabitOptions = habitDetail => {
   const detailToArray = Object.entries(habitDetail);

@@ -1,5 +1,5 @@
-export const Input = defaultValue => {
-  return `<input type="text" class="title-edit" value="${defaultValue}"/>`;
+export const Input = (defaultValue, placeholder) => {
+  return `<input type="text" class="title-edit" value="${defaultValue}" placeholder="${placeholder}"/>`;
 };
 
 export const Title = title => {
