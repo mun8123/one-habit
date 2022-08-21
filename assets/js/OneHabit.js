@@ -5,12 +5,18 @@ export default class OneHabit {
     this.App = document.querySelector('#App');
     this.isEditing = false;
     this.habit = '출근도장';
+    this.habitDetail = {
+      time: '8:00'
+    };
 
     this.render();
   }
 
   pageTemplate = () => {
-    return Component.Habit(this.isEditing, this.habit);
+    return (
+      Component.Habit(this.isEditing, this.habit) +
+      Component.HabitDetail(this.habitDetail)
+    );
   };
 
   render = () => {

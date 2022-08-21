@@ -6,8 +6,8 @@ export const Title = title => {
   return `<h1>${title}</h1>`;
 };
 
-export const Text = text => {
-  return `<div>${text}</div>`;
+export const Text = (text, className) => {
+  return `<div class="${className}">${text}</div>`;
 };
 
 export const Button = text => {
