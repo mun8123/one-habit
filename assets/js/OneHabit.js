@@ -1,4 +1,5 @@
 import * as Component from './Component.js';
+import { todayInfo } from './date.js';
 
 export default class OneHabit {
   constructor() {
@@ -6,8 +7,9 @@ export default class OneHabit {
     this.isEditing = false;
     this.habit = '출근도장';
     this.habitDetail = {
-      time: '8:00'
+      time: '8:00',
     };
+    this.challengePeriod = 3;
 
     this.render();
   }
@@ -15,7 +17,8 @@ export default class OneHabit {
   pageTemplate = () => {
     return (
       Component.Habit(this.isEditing, this.habit) +
-      Component.HabitDetail(this.habitDetail)
+      Component.HabitDetail(this.habitDetail) +
+      Component.Calendar(this.challengePeriod, todayInfo.month, todayInfo.date)
     );
   };
 

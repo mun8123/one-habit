@@ -11,3 +11,21 @@ export const HabitDetail = habitDetail => {
     '',
   );
 };
+
+export const CalendarItem = date => {
+  return `<div class="calendar-item">
+    <div class="date">${date}</div>
+    <div class="content"></div>
+  </div>`;
+};
+
+export const Calendar = (challengePeriod, month, date) => {
+  const calendarItems = Array.from({ length: challengePeriod }, (_, i) => {
+    return CalendarItem(`${month}/${date + i}`);
+  });
+
+  return calendarItems.reduce(
+    (canlendarTemplate, item) => (canlendarTemplate += item),
+    '',
+  );
+};
