@@ -1,7 +1,3 @@
-export const Input = (defaultValue, placeholder) => {
-  return `<input type="text" class="title-edit" value="${defaultValue}" placeholder="${placeholder}"/>`;
-};
-
 export const Title = title => {
   return `<h1>${title}</h1>`;
 };
@@ -12,4 +8,10 @@ export const Text = (text, className) => {
 
 export const Button = text => {
   return `<button>${text}</button>`;
+};
+
+export const Input = (idName, label, placeholder, isRequired = false) => {
+  const requiredAttribute = isRequired ? 'required' : '';
+  return `<label for="${idName}">${label}</label>
+    <input id="${idName}" type="text" placeholder="${placeholder}" ${requiredAttribute}></input>`;
 };
