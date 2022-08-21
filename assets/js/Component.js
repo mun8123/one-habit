@@ -1,13 +1,13 @@
-import * as element from './Element.js';
+import * as Element from './Element.js';
 
 export const Habit = (isEditing, title) =>
-  isEditing ? element.Input(title) : element.Title(title);
+  isEditing ? Element.Input(title) : Element.Title(title);
 
 export const HabitDetail = habitDetail => {
   const detailToArray = Object.entries(habitDetail);
   return detailToArray.reduce(
     (detailTemplate, [detailKey, detailValue]) =>
-      (detailTemplate += element.Text(detailValue, detailKey)),
+      (detailTemplate += Element.Text(detailValue, detailKey)),
     '',
   );
 };
@@ -29,3 +29,7 @@ export const Calendar = (challengePeriod, month, date) => {
     '',
   );
 };
+
+export const CheckButton = (text) => {
+  return Element.Button(text);
+}

@@ -18,7 +18,8 @@ export default class OneHabit {
     return (
       Component.Habit(this.isEditing, this.habit) +
       Component.HabitDetail(this.habitDetail) +
-      Component.Calendar(this.challengePeriod, todayInfo.month, todayInfo.date)
+      Component.Calendar(this.challengePeriod, todayInfo.month, todayInfo.date) +
+      Component.CheckButton('성공')
     );
   };
 
