@@ -42,6 +42,11 @@ export default class OneHabit {
     this.store.updateData(this.habit);
   };
 
+  unCheck = () => {
+    this.habit.isCheckedToday = false;
+    this.store.updateData(this.habit);
+  };
+
   handleEnrollButtonClick = e => {
     e.preventDefault();
     if (e.target.className === ENROLL_FORM_CLASSNAME.ENROLL_BUTTON) {
@@ -55,6 +60,8 @@ export default class OneHabit {
   };
 
   handleCheckButtonClick = ({ target }) => {
-    if (target.className === CLASSNAME.checkButton) this.check();
+    if (target.className === CLASSNAME.checkButton) {
+      this.habit.isCheckedToday ? this.unCheck() : this.check();
+    }
   };
 }
