@@ -1,6 +1,6 @@
 import * as Component from './Component.js';
-import { BUTTON_TEXT } from '../constant/constant.js';
 import HabitEnrollForm from './HabitEnrollForm.js';
+import { BUTTON_TEXT, CLASSNAME } from '../constant/constant.js';
 
 export default class HabitTrackerPage {
   constructor() {
@@ -9,12 +9,13 @@ export default class HabitTrackerPage {
   }
 
   pageTemplate = habit => {
-    const { title, startDate, options, challengePeriod } = habit;
+    const { title, startDate, options, challengePeriod, isCheckedToday } =
+      habit;
     return (
       Component.HabitTitle(title, BUTTON_TEXT.habitTitlePlaceholder) +
       Component.HabitOptions(options) +
-      Component.Calendar(challengePeriod, startDate) +
-      Component.CheckButton(BUTTON_TEXT.checkButton) +
+      Component.Calendar(challengePeriod, startDate, isCheckedToday) +
+      Component.CheckButton(BUTTON_TEXT.checkButton, CLASSNAME.checkButton) +
       this.formModal.formTemplate()
     );
   };
@@ -28,6 +29,9 @@ export default class HabitTrackerPage {
   };
 
   addEvents = handlerBundle => {
-    this.App.addEventListener('click', handlerBundle.enrollButtonClick);
+    this.App.addEventListener('click', e => {
+      handlerBundle.enrollButtonClick(e);
+      handlerBundle.checkButtonClick(e);
+    });
   };
 }
