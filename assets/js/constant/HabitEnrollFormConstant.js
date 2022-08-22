@@ -1,4 +1,4 @@
-export const CLASSNAME = {
+export const ENROLL_FORM_CLASSNAME = {
   ENROLL_FORM: 'habit-enroll-form',
   ENROLL_BUTTON: 'habit-enroll-button',
   ENROLL_INPUT: 'habit-enroll-input',

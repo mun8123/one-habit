@@ -4,9 +4,11 @@ import {
   splitDateBySlash,
   getDateOfCalendarItem,
 } from '../domain/calendar.js';
-import { PLACEHOLDER, CHECK_ICON, CLASSNAME } from '../constant/constant.js';
-import { ENROLL_FORM } from '../constant/HabitEnrollFormConstant.js';
-import { getLastDateOfMonth } from '../utils/date.js';
+import { PLACEHOLDER, CHECK_ICON } from '../constant/constant.js';
+import {
+  ENROLL_FORM,
+  ENROLL_FORM_CLASSNAME,
+} from '../constant/HabitEnrollFormConstant.js';
 
 export const HabitTitle = title => Element.Title(title);
 
@@ -26,7 +28,7 @@ export const HabitEnrollInput = elementData => {
     : PLACEHOLDER.optionalInput;
   return Element.Input(
     idName,
-    CLASSNAME.ENROLL_INPUT,
+    ENROLL_FORM_CLASSNAME.ENROLL_INPUT,
     label,
     placeholder,
     isRequired,
@@ -37,14 +39,16 @@ export const HabitEnrollForm = () => {
   const [title, [_, options]] = Object.entries(ENROLL_FORM);
   const optionsToArray = Object.entries(options);
 
-  return `<form class="${CLASSNAME.ENROLL_FORM}">
+  return `<form class="${ENROLL_FORM_CLASSNAME.ENROLL_FORM}">
     ${HabitEnrollInput(title)}
     ${optionsToArray.reduce(
       (optionsTemplate, option) =>
         (optionsTemplate += HabitEnrollInput(option)),
       '',
     )}
-    <input class="${CLASSNAME.ENROLL_BUTTON}" type="submit" value="등록">
+    <input class="${
+      ENROLL_FORM_CLASSNAME.ENROLL_BUTTON
+    }" type="submit" value="등록">
   </form>`;
 };
 
