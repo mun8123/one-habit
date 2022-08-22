@@ -12,3 +12,7 @@ export const PLACEHOLDER = {
   optionalInput: '옵션임',
   requiredInput: '필수임',
 };
+
+export const CLASSNAME = {
+  checkButton: 'check-button',
+};

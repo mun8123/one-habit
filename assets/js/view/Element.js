@@ -6,8 +6,8 @@ export const Text = (text, className) => {
   return `<div class="${className}">${text}</div>`;
 };
 
-export const Button = text => {
-  return `<button>${text}</button>`;
+export const Button = (text, className) => {
+  return `<button class="${className}">${text}</button>`;
 };
 
 export const Input = (

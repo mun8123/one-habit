@@ -40,6 +40,6 @@ export const Calendar = (period, firstDate, isCheckedToday) => {
   );
 };
 
-export const CheckButton = text => {
-  return Element.Button(text);
+export const CheckButton = (text, className) => {
+  return Element.Button(text, className);
 };
