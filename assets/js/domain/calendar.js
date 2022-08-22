@@ -9,10 +9,10 @@ export const isCheckedCalendarItem = (month, date, isCheckedToday) =>
 export const splitDateBySlash = dateWithSlash =>
   dateWithSlash.split('/').map(Number);
 
-export const getDateOfCalendarItem = (year, month, currentDate) => {
+export const calculateDateOfItem = (year, month, currentDate) => {
   const lastDateOfMonth = getLastDateOfMonth(year, month);
   let DateOfItem = '';
-  
+
   if (currentDate > lastDateOfMonth) {
     DateOfItem = `${month + 1}/${currentDate - lastDateOfMonth}`;
   } else {

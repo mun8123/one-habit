@@ -2,7 +2,7 @@ import * as Element from './Element.js';
 import {
   isCheckedCalendarItem,
   splitDateBySlash,
-  getDateOfCalendarItem,
+  calculateDateOfItem,
 } from '../domain/calendar.js';
 import { PLACEHOLDER, CHECK_ICON } from '../constant/constant.js';
 import {
@@ -64,7 +64,7 @@ export const calendarItemArray = (period, firstDate, isCheckedToday) => {
 
   return Array.from({ length: period }, (_, i) => {
     const currentDate = date + i;
-    const DateOfItem = getDateOfCalendarItem(year, month, currentDate);
+    const DateOfItem = calculateDateOfItem(year, month, currentDate);
 
     return CalendarItem(
       DateOfItem,
