@@ -1,4 +1,4 @@
-import { todayInfo } from './utils/date.js';
+import { todayInfo } from '../utils/date.js';
 
 export default class Habit {
   constructor(title, time, location) {
@@ -9,5 +9,6 @@ export default class Habit {
       location: location,
     };
     this.challengePeriod = 3;
+    this.isCheckedToday = false;
   }
 }
