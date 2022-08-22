@@ -15,3 +15,6 @@ export const isPastDate = (month, date) => {
     return false;
   }
 };
+
+export const isToday = (month, date) =>
+  month === todayInfo.month && date === todayInfo.date;

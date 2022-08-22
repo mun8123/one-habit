@@ -1,6 +1,6 @@
 import * as Element from './Element.js';
 import { CHECK_ICON } from '../constant/constant.js';
-import { isPastDate } from '../utils/date.js';
+import { isCheckedCalendarItem } from '../domain/validator.js';
 
 export const HabitTitle = title => Element.Title(title);
 
@@ -20,14 +20,20 @@ export const CalendarItem = (date, isChecked) => {
   </div>`;
 };
 
-export const Calendar = (period, firstDate) => {
+export const calendarItemArray = (period, firstDate, isCheckedToday) => {
   const [_, month, date] = firstDate.split('/').map(Number);
 
-  const calendarItems = Array.from({ length: period }, (_, i) => {
-    const isChecked = isPastDate(month, date + i);
-    return CalendarItem(`${month}/${date + i}`, isChecked);
+  return Array.from({ length: period }, (_, i) => {
+    const DateOfItem = `${month}/${date + i}`;
+    return CalendarItem(
+      DateOfItem,
+      isCheckedCalendarItem(month, date + i, isCheckedToday),
+    );
   });
+};
 
+export const Calendar = (period, firstDate, isCheckedToday) => {
+  const calendarItems = calendarItemArray(period, firstDate, isCheckedToday);
   return calendarItems.reduce(
     (canlendarTemplate, item) => (canlendarTemplate += item),
     '',
