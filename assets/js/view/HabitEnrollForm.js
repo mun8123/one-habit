@@ -8,7 +8,13 @@ export default class HabitEnrollForm {
     const placeholder = isRequired
       ? PLACEHOLDER.requiredInput
       : PLACEHOLDER.optionalInput;
-    return Input(idName, label, placeholder, isRequired);
+    return Input(
+      idName,
+      CLASSNAME.ENROLL_INPUT,
+      label,
+      placeholder,
+      isRequired,
+    );
   };
 
   formTemplate = () => {
