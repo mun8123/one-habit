@@ -1,6 +1,7 @@
 import * as Element from './Element.js';
-import { CHECK_ICON } from '../constant/constant.js';
 import { isCheckedCalendarItem } from '../domain/validator.js';
+import { PLACEHOLDER, CHECK_ICON, CLASSNAME } from '../constant/constant.js';
+import { ENROLL_FORM } from '../constant/HabitEnrollFormConstant.js';
 
 export const HabitTitle = title => Element.Title(title);
 
@@ -11,6 +12,35 @@ export const HabitOptions = habitDetail => {
       (detailTemplate += Element.Text(detailValue, detailKey)),
     '',
   );
+};
+
+export const HabitEnrollInput = elementData => {
+  const [_, { idName, label, isRequired }] = elementData;
+  const placeholder = isRequired
+    ? PLACEHOLDER.requiredInput
+    : PLACEHOLDER.optionalInput;
+  return Element.Input(
+    idName,
+    CLASSNAME.ENROLL_INPUT,
+    label,
+    placeholder,
+    isRequired,
+  );
+};
+
+export const HabitEnrollForm = () => {
+  const [title, [_, options]] = Object.entries(ENROLL_FORM);
+  const optionsToArray = Object.entries(options);
+
+  return `<form class="${CLASSNAME.ENROLL_FORM}">
+    ${HabitEnrollInput(title)}
+    ${optionsToArray.reduce(
+      (optionsTemplate, option) =>
+        (optionsTemplate += HabitEnrollInput(option)),
+      '',
+    )}
+    <input class="${CLASSNAME.ENROLL_BUTTON}" type="submit" value="등록">
+  </form>`;
 };
 
 export const CalendarItem = (date, isChecked) => {

@@ -1,11 +1,9 @@
 import * as Component from './Component.js';
-import HabitEnrollForm from './HabitEnrollForm.js';
 import { BUTTON_TEXT, CLASSNAME } from '../constant/constant.js';
 
 export default class HabitTrackerPage {
   constructor() {
     this.App = document.querySelector('#App');
-    this.formModal = new HabitEnrollForm(this.App);
   }
 
   pageTemplate = habit => {
@@ -16,7 +14,7 @@ export default class HabitTrackerPage {
       Component.HabitOptions(options) +
       Component.Calendar(challengePeriod, startDate, isCheckedToday) +
       Component.CheckButton(BUTTON_TEXT.checkButton, CLASSNAME.checkButton) +
-      this.formModal.formTemplate()
+      Component.HabitEnrollForm()
     );
   };
 
