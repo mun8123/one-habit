@@ -1,5 +1,7 @@
 export const STORAGE_KEY = 'habitData';
 
+export const CHECK_ICON = '🐶';
+
 export const BUTTON_TEXT = {
   checkButton: '성공',
   enrollButton: '등록',
