@@ -1,4 +1,4 @@
-import { STORAGE_KEY } from './constant.js';
+import { STORAGE_KEY } from './constant/constant.js';
 
 export default class Store {
   constructor() {
