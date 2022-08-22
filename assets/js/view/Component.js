@@ -1,7 +1,12 @@
 import * as Element from './Element.js';
-import { isCheckedCalendarItem } from '../domain/validator.js';
+import {
+  isCheckedCalendarItem,
+  splitDateBySlash,
+  getDateOfCalendarItem,
+} from '../domain/calendar.js';
 import { PLACEHOLDER, CHECK_ICON, CLASSNAME } from '../constant/constant.js';
 import { ENROLL_FORM } from '../constant/HabitEnrollFormConstant.js';
+import { getLastDateOfMonth } from '../utils/date.js';
 
 export const HabitTitle = title => Element.Title(title);
 
@@ -51,13 +56,15 @@ export const CalendarItem = (date, isChecked) => {
 };
 
 export const calendarItemArray = (period, firstDate, isCheckedToday) => {
-  const [_, month, date] = firstDate.split('/').map(Number);
+  let [year, month, date] = splitDateBySlash(firstDate);
 
   return Array.from({ length: period }, (_, i) => {
-    const DateOfItem = `${month}/${date + i}`;
+    const currentDate = date + i;
+    const DateOfItem = getDateOfCalendarItem(year, month, currentDate);
+
     return CalendarItem(
       DateOfItem,
-      isCheckedCalendarItem(month, date + i, isCheckedToday),
+      isCheckedCalendarItem(month, currentDate, isCheckedToday),
     );
   });
 };

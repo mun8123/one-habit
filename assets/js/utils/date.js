@@ -1,5 +1,8 @@
 const today = new Date();
 
+export const getLastDateOfMonth = (year, month) =>
+  new Date(year, month, 0).getDate();
+
 export const todayInfo = {
   year: today.getFullYear(),
   month: today.getMonth() + 1,
