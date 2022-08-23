@@ -1,13 +1,13 @@
-import Store from './Store.js';
+import Store from './model/Store.js';
 import HabitTrackerPage from './view/HabitTrackerPage.js';
 import Habit from './domain/Habit.js';
+import OneHabitData from './model/OneHabitData.js';
 import { ENROLL_FORM_CLASSNAME } from './constant/HabitEnrollFormConstant.js';
 import { CLASSNAME } from './constant/constant.js';
-import Challenge from './domain/challenge.js';
 
 export default class OneHabit {
   constructor() {
-    this.store = new Store();
+    this.store = new Store(new OneHabitData());
     this.page = new HabitTrackerPage();
     this.habit = this.store.data.habit;
     this.challenge = this.store.data.challenge;
@@ -15,32 +15,27 @@ export default class OneHabit {
   }
 
   init = () => {
+    this.oneHabitData = new OneHabitData(this.habit, this.challenge);
     const handlerBundle = {
       enrollButtonClick: this.handleEnrollButtonClick,
       checkButtonClick: this.handleCheckButtonClick,
     };
 
-    this.page.render({
-      habit: this.habit,
-      challenge: this.challenge,
-    });
+    this.page.render(this.oneHabitData);
     this.page.addEvents(handlerBundle);
     this.store.subscribe(this.update);
   };
 
   update = () => {
     const { habit, challenge } = this.store.data;
-    this.habit = habit;
-    this.challenge = challenge;
+    this.habit = this.oneHabitData.habit = habit;
+    this.challenge = this.oneHabitData.challenge = challenge;
     this.reRender();
   };
 
   reRender = () => {
     this.page.clear();
-    this.page.render({
-      habit: this.habit,
-      challenge: this.challenge,
-    });
+    this.page.render(this.oneHabitData);
   };
 
   enroll = newOneHabitData => {
@@ -49,18 +44,12 @@ export default class OneHabit {
 
   check = () => {
     this.challenge.isCheckedToday = true;
-    this.store.updateData({
-      habit: this.habit,
-      challenge: this.challenge,
-    });
+    this.store.updateData(this.oneHabitData);
   };
 
   unCheck = () => {
     this.challenge.isCheckedToday = false;
-    this.store.updateData({
-      habit: this.habit,
-      challenge: this.challenge,
-    });
+    this.store.updateData(this.oneHabitData);
   };
 
   handleEnrollButtonClick = e => {
@@ -70,11 +59,8 @@ export default class OneHabit {
         `.${ENROLL_FORM_CLASSNAME.ENROLL_INPUT}`,
       );
       const inputValues = [...inputs].map(input => input.value);
-      const newOneHabitData = {
-        habit: new Habit(...inputValues),
-        challenge: new Challenge(),
-      };
-      this.enroll(newOneHabitData);
+      const newHabit = new Habit(...inputValues);
+      this.enroll(new OneHabitData(newHabit));
     }
   };
 

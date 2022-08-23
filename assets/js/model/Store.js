@@ -1,18 +1,11 @@
-import { STORAGE_KEY } from './constant/constant.js';
-import Challenge from './domain/challenge.js';
-import Habit from './domain/Habit.js';
+import { STORAGE_KEY } from '../constant/constant.js';
 
 export default class Store {
-  constructor() {
+  constructor(defaultData) {
     this.storage = window.localStorage;
-    this.data = this.getData() || this.defaultData;
+    this.data = this.getData() || defaultData;
     this.observers = [];
   }
-
-  defaultData = {
-    habit: new Habit(),
-    challenge: new Challenge(),
-  };
 
   setData = (data, key = STORAGE_KEY) => {
     this.storage.setItem(key, JSON.stringify(data));
