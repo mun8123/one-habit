@@ -1,9 +1,9 @@
-import Challenge from '../domain/challenge.js';
+import Challenge from '../domain/Challenge.js';
 import Habit from '../domain/Habit.js';
 
 export default class OneHabitData {
-  constructor(habit, challenge) {
-    this.habit = habit || new Habit();
-    this.challenge = challenge || new Challenge();
+  constructor(habit = {}, challenge = {}) {
+    this.habit = new Habit(habit);
+    this.challenge = new Challenge(challenge);
   }
 }

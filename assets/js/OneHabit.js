@@ -1,16 +1,19 @@
 import Store from './model/Store.js';
 import HabitTrackerPage from './view/HabitTrackerPage.js';
 import Habit from './domain/Habit.js';
+import Challenge from './domain/Challenge.js';
 import OneHabitData from './model/OneHabitData.js';
 import { ENROLL_FORM_CLASSNAME } from './constant/HabitEnrollFormConstant.js';
 import { CLASSNAME } from './constant/constant.js';
 
+const defaultData = new OneHabitData();
+
 export default class OneHabit {
   constructor() {
-    this.store = new Store(new OneHabitData());
+    this.store = new Store(defaultData);
     this.page = new HabitTrackerPage();
-    this.habit = this.store.data.habit;
-    this.challenge = this.store.data.challenge;
+    this.habit = new Habit(this.store.data.habit);
+    this.challenge = new Challenge(this.store.data.challenge);
     this.init();
   }
 
@@ -52,6 +55,16 @@ export default class OneHabit {
     this.store.updateData(this.oneHabitData);
   };
 
+  createHabit = (title, time, location) => {
+    return new Habit({
+      title: title,
+      options: {
+        time: time,
+        location: location,
+      },
+    });
+  };
+
   handleEnrollButtonClick = e => {
     e.preventDefault();
     if (e.target.className === ENROLL_FORM_CLASSNAME.ENROLL_BUTTON) {
@@ -59,7 +72,7 @@ export default class OneHabit {
         `.${ENROLL_FORM_CLASSNAME.ENROLL_INPUT}`,
       );
       const inputValues = [...inputs].map(input => input.value);
-      const newHabit = new Habit(...inputValues);
+      const newHabit = this.createHabit(...inputValues);
       this.enroll(new OneHabitData(newHabit));
     }
   };
