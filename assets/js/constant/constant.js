@@ -17,4 +17,5 @@ export const PLACEHOLDER = {
 export const CLASSNAME = {
   checkButton: 'check-button',
   enrollFormOpenButton: 'enroll-form-open-button',
+  floatingButton: 'floating-button',
 };

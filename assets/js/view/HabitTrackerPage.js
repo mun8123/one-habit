@@ -32,7 +32,7 @@ export default class HabitTrackerPage {
       Component.HabitEnrollForm() +
       Component.EnrollFormOpenButton(
         BUTTON_TEXT.enrollFormOpenButton,
-        CLASSNAME.enrollFormOpenButton,
+        `${CLASSNAME.enrollFormOpenButton} ${CLASSNAME.floatingButton}`,
       )
     );
   };

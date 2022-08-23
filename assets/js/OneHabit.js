@@ -93,14 +93,14 @@ export default class OneHabit {
   };
 
   handleEnrollFormOpenButtonClick = ({ target }) => {
-    if (target.className === CLASSNAME.enrollFormOpenButton) {
-      document.querySelector('.dim').style.display = 'block';
+    if (target.classList.contains(CLASSNAME.enrollFormOpenButton)) {
+      document.querySelector('.dim').style.height = '100vh';
     }
   };
 
   handleDimLayerClick = ({ target }) => {
     if (target.className === 'dim') {
-      target.style.display = 'none';
+      target.style.height = '0';
     }
   };
 
@@ -113,7 +113,7 @@ export default class OneHabit {
       const inputValues = [...inputs].map(input => input.value);
       const newHabit = this.createHabit(...inputValues);
       this.enroll(new OneHabitData(newHabit));
-      document.querySelector('.dim').style.display = 'none';
+      document.querySelector('.dim').style.height = '0';
     }
   };
 
