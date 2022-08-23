@@ -1,20 +1,39 @@
 import * as Component from './Component.js';
-import { BUTTON_TEXT, CLASSNAME } from '../constant/constant.js';
+import {
+  DEFAULT_TITLE_TEXT,
+  BUTTON_TEXT,
+  CLASSNAME,
+} from '../constant/constant.js';
 
 export default class HabitTrackerPage {
   constructor() {
     this.App = document.querySelector('#App');
   }
 
-  pageTemplate = ({ habit, challenge }) => {
+  greetingPageTemplate = () => {
+    return (
+      Component.HabitTitle(DEFAULT_TITLE_TEXT) +
+      Component.EnrollFormOpenButton(
+        BUTTON_TEXT.enrollFormOpenButton,
+        CLASSNAME.enrollFormOpenButton,
+      ) +
+      Component.HabitEnrollForm()
+    );
+  };
+
+  trackerPageTemplate = ({ habit, challenge }) => {
     const { title, options } = habit;
     const { startDate, challengePeriod, isCheckedToday } = challenge;
     return (
-      Component.HabitTitle(title, BUTTON_TEXT.habitTitlePlaceholder) +
+      Component.HabitTitle(title) +
       Component.HabitOptions(options) +
       Component.Calendar(challengePeriod, startDate, isCheckedToday) +
       Component.CheckButton(BUTTON_TEXT.checkButton, CLASSNAME.checkButton) +
-      Component.HabitEnrollForm()
+      Component.HabitEnrollForm() +
+      Component.EnrollFormOpenButton(
+        BUTTON_TEXT.enrollFormOpenButton,
+        CLASSNAME.enrollFormOpenButton,
+      )
     );
   };
 
@@ -22,8 +41,8 @@ export default class HabitTrackerPage {
     this.App.innerHTML = '';
   };
 
-  render = pageData => {
-    this.App.insertAdjacentHTML('beforeend', this.pageTemplate(pageData));
+  render = (pageTemplate, pageData) => {
+    this.App.insertAdjacentHTML('beforeend', pageTemplate(pageData));
   };
 
   addEvents = handlerBundle => {

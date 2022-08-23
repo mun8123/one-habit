@@ -6,6 +6,7 @@ import { ENROLL_FORM_CLASSNAME } from './constant/HabitEnrollFormConstant.js';
 import { CLASSNAME } from './constant/constant.js';
 
 const defaultData = new OneHabitData();
+defaultData.isDefault = true;
 
 export default class OneHabit {
   constructor() {
@@ -15,29 +16,39 @@ export default class OneHabit {
       this.store.data.habit,
       this.store.data.challenge,
     );
-    this.init();
-  }
 
-  setPage = () => {
-    const handlerBundle = {
+    this.handlerBundle = {
       enrollButtonClick: this.handleEnrollButtonClick,
       checkButtonClick: this.handleCheckButtonClick,
     };
-    
+
+    this.init();
+  }
+
+  setGreetingPage = () => {
+    this.page.render(this.page.greetingPageTemplate);
+    this.page.addEvents(this.handlerBundle);
+  };
+
+  setHabitTrackerPage = () => {
     if (this.oneHabitData.challenge.isFailed()) {
       this.oneHabitData.resetChallenge();
     } else if (this.oneHabitData.challenge.isSuccess()) {
       this.oneHabitData.goToNextChallenge();
     }
-
-    this.oneHabitData.initForToday();
-    this.store.updateData(this.oneHabitData);
-    this.page.addEvents(handlerBundle);
+    this.page.addEvents(this.handlerBundle);
   };
 
   init = () => {
+    if (this.store.data.isDefault) {
+      this.setGreetingPage();
+      return;
+    }
+    this.setHabitTrackerPage();
+
+    this.oneHabitData.initForToday();
     this.store.subscribe(this.update);
-    this.setPage();
+    this.store.updateData(this.oneHabitData);
   };
 
   update = () => {
@@ -49,10 +60,13 @@ export default class OneHabit {
 
   reRender = () => {
     this.page.clear();
-    this.page.render(this.oneHabitData);
+    this.page.render(this.page.trackerPageTemplate, this.oneHabitData);
   };
 
   enroll = newOneHabitData => {
+    if (this.oneHabitData.isDefault) {
+      delete this.oneHabitData.isDefault;
+    }
     this.store.updateData(newOneHabitData);
   };
 
