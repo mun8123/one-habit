@@ -6,9 +6,9 @@ export default class HabitTrackerPage {
     this.App = document.querySelector('#App');
   }
 
-  pageTemplate = habit => {
-    const { title, startDate, options, challengePeriod, isCheckedToday } =
-      habit;
+  pageTemplate = ({ habit, challenge }) => {
+    const { title, options } = habit;
+    const { startDate, challengePeriod, isCheckedToday } = challenge;
     return (
       Component.HabitTitle(title, BUTTON_TEXT.habitTitlePlaceholder) +
       Component.HabitOptions(options) +
@@ -22,8 +22,8 @@ export default class HabitTrackerPage {
     this.App.innerHTML = '';
   };
 
-  render = habit => {
-    this.App.insertAdjacentHTML('beforeend', this.pageTemplate(habit));
+  render = pageData => {
+    this.App.insertAdjacentHTML('beforeend', this.pageTemplate(pageData));
   };
 
   addEvents = handlerBundle => {
