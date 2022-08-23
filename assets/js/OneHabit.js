@@ -21,6 +21,7 @@ export default class OneHabit {
       enrollButtonClick: this.handleEnrollButtonClick,
       checkButtonClick: this.handleCheckButtonClick,
       enrollFormOpenButtonClick: this.handleEnrollFormOpenButtonClick,
+      dimLayerClick: this.handleDimLayerClick,
     };
 
     this.init();
@@ -97,6 +98,12 @@ export default class OneHabit {
     }
   };
 
+  handleDimLayerClick = ({ target }) => {
+    if (target.className === 'dim') {
+      target.style.display = 'none';
+    }
+  };
+
   handleEnrollButtonClick = e => {
     e.preventDefault();
     if (e.target.className === ENROLL_FORM_CLASSNAME.ENROLL_BUTTON) {
@@ -106,6 +113,7 @@ export default class OneHabit {
       const inputValues = [...inputs].map(input => input.value);
       const newHabit = this.createHabit(...inputValues);
       this.enroll(new OneHabitData(newHabit));
+      document.querySelector('.dim').style.display = 'none';
     }
   };
 

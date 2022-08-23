@@ -50,6 +50,7 @@ export default class HabitTrackerPage {
       handlerBundle.enrollButtonClick(e);
       handlerBundle.checkButtonClick(e);
       handlerBundle.enrollFormOpenButtonClick(e);
+      handlerBundle.dimLayerClick(e);
     });
   };
 }
