@@ -1,7 +1,7 @@
 import { getLastDateOfMonth, todayInfo } from '../utils/date.js';
 import { splitDateBySlash } from './calendar.js';
 
-const CHALLENGE_CICLE = [3, 7, 21, 30];
+const CHALLENGE_CICLE = [3, 7, 21, 35];
 
 export default class Challenge {
   constructor({

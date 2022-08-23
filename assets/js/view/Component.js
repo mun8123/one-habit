@@ -61,7 +61,7 @@ export const calendarItemArray = (period, firstDate, isCheckedToday) => {
 
   return Array.from({ length: period }, (_, i) => {
     const currentDate = date + i;
-    const dateInArray = calculateDate(year, month, currentDate); 
+    const dateInArray = calculateDate(year, month, currentDate);
     const dateOfItem = reduceDateToString(dateInArray);
     return CalendarItem(
       dateOfItem,
@@ -72,10 +72,11 @@ export const calendarItemArray = (period, firstDate, isCheckedToday) => {
 
 export const Calendar = (period, firstDate, isCheckedToday) => {
   const calendarItems = calendarItemArray(period, firstDate, isCheckedToday);
-  return calendarItems.reduce(
+  return `<div class="calendar">
+  ${calendarItems.reduce(
     (canlendarTemplate, item) => (canlendarTemplate += item),
     '',
-  );
+  )}</div>`;
 };
 
 export const CheckButton = (text, className) => {
