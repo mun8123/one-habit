@@ -21,3 +21,18 @@ export const isPastDate = (month, date) => {
 
 export const isToday = (month, date) =>
   month === todayInfo.month && date === todayInfo.date;
+
+export const calculateDate = (year, month, currentDate) => {
+  const lastDateOfMonth = getLastDateOfMonth(year, month);
+  if (currentDate > lastDateOfMonth) {
+    return [month + 1, currentDate - lastDateOfMonth];
+  }
+  return [month, currentDate];
+};
+
+export const reduceDateToString = dateInArray => {
+  return dateInArray.reduce(
+    (DateOfItem, dateInfo) => (DateOfItem += dateInfo),
+    '',
+  );
+};

@@ -1,9 +1,6 @@
 import * as Element from './Element.js';
-import {
-  isCheckedCalendarItem,
-  splitDateBySlash,
-  calculateDateOfItem,
-} from '../domain/calendar.js';
+import { isCheckedCalendarItem, splitDateBySlash } from '../domain/calendar.js';
+import { calculateDate, reduceDateToString } from '../utils/date.js';
 import { PLACEHOLDER, CHECK_ICON } from '../constant/constant.js';
 import {
   ENROLL_FORM,
@@ -60,14 +57,14 @@ export const CalendarItem = (date, isChecked) => {
 };
 
 export const calendarItemArray = (period, firstDate, isCheckedToday) => {
-  let [year, month, date] = splitDateBySlash(firstDate);
+  const [year, month, date] = splitDateBySlash(firstDate);
 
   return Array.from({ length: period }, (_, i) => {
     const currentDate = date + i;
-    const DateOfItem = calculateDateOfItem(year, month, currentDate);
-
+    const dateInArray = calculateDate(year, month, currentDate); 
+    const dateOfItem = reduceDateToString(dateInArray);
     return CalendarItem(
-      DateOfItem,
+      dateOfItem,
       isCheckedCalendarItem(month, currentDate, isCheckedToday),
     );
   });
