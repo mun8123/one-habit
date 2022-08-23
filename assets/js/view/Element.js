@@ -12,11 +12,12 @@ export const Button = (text, className) => {
 
 export const Input = (
   idName,
+  className,
   label,
   placeholder,
   isRequired = false,
 ) => {
   const requiredAttribute = isRequired ? 'required' : '';
   return `<label for="${idName}">${label}</label>
-    <input id="${idName}" type="text" placeholder="${placeholder}" ${requiredAttribute}></input>`;
+    <input id="${idName}" class="${className}" type="text" placeholder="${placeholder}" ${requiredAttribute}></input>`;
 };

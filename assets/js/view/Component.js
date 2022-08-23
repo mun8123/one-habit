@@ -23,9 +23,10 @@ export const HabitEnrollInput = elementData => {
   const placeholder = isRequired
     ? PLACEHOLDER.requiredInput
     : PLACEHOLDER.optionalInput;
-  return `<div class="${ENROLL_FORM_CLASSNAME.ENROLL_INPUT}">
+  return `<div class="${ENROLL_FORM_CLASSNAME.ENROLL_INPUT_BOX}">
   ${Element.Input(
     idName,
+    ENROLL_FORM_CLASSNAME.ENROLL_INPUT,
     label,
     placeholder,
     isRequired,
@@ -36,17 +37,19 @@ export const HabitEnrollForm = () => {
   const [title, [_, options]] = Object.entries(ENROLL_FORM);
   const optionsToArray = Object.entries(options);
 
-  return `<form class="${ENROLL_FORM_CLASSNAME.ENROLL_FORM}">
-    ${HabitEnrollInput(title)}
-    ${optionsToArray.reduce(
-      (optionsTemplate, option) =>
-        (optionsTemplate += HabitEnrollInput(option)),
-      '',
-    )}
-    <input class="${
-      ENROLL_FORM_CLASSNAME.ENROLL_BUTTON
-    }" type="submit" value="등록">
-  </form>`;
+  return `<div class="dim">
+    <form class="${ENROLL_FORM_CLASSNAME.ENROLL_FORM}">
+      ${HabitEnrollInput(title)}
+      ${optionsToArray.reduce(
+        (optionsTemplate, option) =>
+          (optionsTemplate += HabitEnrollInput(option)),
+        '',
+      )}
+      <input class="${
+        ENROLL_FORM_CLASSNAME.ENROLL_BUTTON
+      }" type="submit" value="등록">
+    </form>
+  </div>`;
 };
 
 export const CalendarItem = (date, isChecked) => {
@@ -80,5 +83,9 @@ export const Calendar = (period, firstDate, isCheckedToday) => {
 };
 
 export const CheckButton = (text, className) => {
+  return Element.Button(text, className);
+};
+
+export const EnrollFormOpenButton = (text, className) => {
   return Element.Button(text, className);
 };

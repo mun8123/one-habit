@@ -1,6 +1,7 @@
 export const ENROLL_FORM_CLASSNAME = {
   ENROLL_FORM: 'habit-enroll-form',
   ENROLL_BUTTON: 'habit-enroll-button',
+  ENROLL_INPUT_BOX: 'habit-enroll-input-box',
   ENROLL_INPUT: 'habit-enroll-input',
 };
 
