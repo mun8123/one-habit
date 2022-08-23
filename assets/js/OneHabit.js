@@ -30,7 +30,10 @@ export default class OneHabit {
       checkButtonClick: this.handleCheckButtonClick,
     };
 
-    this.page.render(this.oneHabitData);
+    if (this.oneHabitData.challenge.isFailed()) {
+      this.oneHabitData.resetChallenge();
+      this.store.updateData(this.oneHabitData);
+    }
     this.page.addEvents(handlerBundle);
   };
 

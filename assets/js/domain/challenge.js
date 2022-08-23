@@ -16,7 +16,17 @@ export default class Challenge {
     this.isCheckedToday = isCheckedToday;
   }
 
-  initIsCheckedToday = () => {
+  isFailed = () => {
+    return this.isCheckedToday === false;
+  };
+
+  resetChallenge = () => {
+    this.startDate = `${todayInfo.year}/${todayInfo.month}/${todayInfo.date}`;
+    this.challengePeriod = CHALLENGE_CICLE[0];
+  };
+
+  initForToday = () => {
+    this.today = todayInfo.date;
     if (this.today !== todayInfo.date) this.isCheckedToday = false;
   };
 }
