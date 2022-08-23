@@ -6,4 +6,8 @@ export default class OneHabitData {
     this.habit = new Habit(habit);
     this.challenge = new Challenge(challenge);
   }
+
+  initForToday = () => {
+    this.challenge.initIsCheckedToday();
+  };
 }

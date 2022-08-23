@@ -1,7 +1,6 @@
 import Store from './model/Store.js';
 import HabitTrackerPage from './view/HabitTrackerPage.js';
 import Habit from './domain/Habit.js';
-import Challenge from './domain/Challenge.js';
 import OneHabitData from './model/OneHabitData.js';
 import { ENROLL_FORM_CLASSNAME } from './constant/HabitEnrollFormConstant.js';
 import { CLASSNAME } from './constant/constant.js';
@@ -12,13 +11,20 @@ export default class OneHabit {
   constructor() {
     this.store = new Store(defaultData);
     this.page = new HabitTrackerPage();
-    this.habit = new Habit(this.store.data.habit);
-    this.challenge = new Challenge(this.store.data.challenge);
+    this.oneHabitData = new OneHabitData(
+      this.store.data.habit,
+      this.store.data.challenge,
+    );
     this.init();
   }
 
-  init = () => {
-    this.oneHabitData = new OneHabitData(this.habit, this.challenge);
+  setStore = () => {
+    this.oneHabitData.initForToday();
+    this.store.updateData(this.oneHabitData);
+    this.store.subscribe(this.update);
+  };
+
+  setPage = () => {
     const handlerBundle = {
       enrollButtonClick: this.handleEnrollButtonClick,
       checkButtonClick: this.handleCheckButtonClick,
@@ -26,13 +32,17 @@ export default class OneHabit {
 
     this.page.render(this.oneHabitData);
     this.page.addEvents(handlerBundle);
-    this.store.subscribe(this.update);
+  };
+
+  init = () => {
+    this.setStore();
+    this.setPage();
   };
 
   update = () => {
     const { habit, challenge } = this.store.data;
-    this.habit = this.oneHabitData.habit = habit;
-    this.challenge = this.oneHabitData.challenge = challenge;
+    this.oneHabitData.habit = habit;
+    this.oneHabitData.challenge = challenge;
     this.reRender();
   };
 
@@ -46,12 +56,12 @@ export default class OneHabit {
   };
 
   check = () => {
-    this.challenge.isCheckedToday = true;
+    this.oneHabitData.challenge.isCheckedToday = true;
     this.store.updateData(this.oneHabitData);
   };
 
   unCheck = () => {
-    this.challenge.isCheckedToday = false;
+    this.oneHabitData.challenge.isCheckedToday = false;
     this.store.updateData(this.oneHabitData);
   };
 
@@ -79,7 +89,9 @@ export default class OneHabit {
 
   handleCheckButtonClick = ({ target }) => {
     if (target.className === CLASSNAME.checkButton) {
-      this.challenge.isCheckedToday ? this.unCheck() : this.check();
+      this.oneHabitData.challenge.isCheckedToday
+        ? this.unCheck()
+        : this.check();
     }
   };
 }
