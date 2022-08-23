@@ -16,4 +16,8 @@ export default class OneHabitData {
     this.habit.createdAt = `${todayInfo.year}/${todayInfo.month}/${todayInfo.date}`;
     this.challenge.resetChallenge();
   };
+
+  goToNextChallenge = () => {
+    this.challenge.goToNextChallenge();
+  };
 }

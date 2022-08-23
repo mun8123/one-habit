@@ -18,27 +18,25 @@ export default class OneHabit {
     this.init();
   }
 
-  setStore = () => {
-    this.oneHabitData.initForToday();
-    this.store.updateData(this.oneHabitData);
-    this.store.subscribe(this.update);
-  };
-
   setPage = () => {
     const handlerBundle = {
       enrollButtonClick: this.handleEnrollButtonClick,
       checkButtonClick: this.handleCheckButtonClick,
     };
-
+    
     if (this.oneHabitData.challenge.isFailed()) {
       this.oneHabitData.resetChallenge();
-      this.store.updateData(this.oneHabitData);
+    } else if (this.oneHabitData.challenge.isSuccess()) {
+      this.oneHabitData.goToNextChallenge();
     }
+
+    this.oneHabitData.initForToday();
+    this.store.updateData(this.oneHabitData);
     this.page.addEvents(handlerBundle);
   };
 
   init = () => {
-    this.setStore();
+    this.store.subscribe(this.update);
     this.setPage();
   };
 

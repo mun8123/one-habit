@@ -1,6 +1,7 @@
-import { todayInfo } from '../utils/date.js';
+import { getLastDateOfMonth, todayInfo } from '../utils/date.js';
+import { splitDateBySlash } from './calendar.js';
 
-const CHALLENGE_CICLE = [3, 7, 21, 30, 31];
+const CHALLENGE_CICLE = [3, 7, 21, 30];
 
 export default class Challenge {
   constructor({
@@ -16,8 +17,13 @@ export default class Challenge {
     this.isCheckedToday = isCheckedToday;
   }
 
+  initForToday = () => {
+    if (this.today !== todayInfo.date) this.isCheckedToday = false;
+    this.today = todayInfo.date;
+  };
+
   isFailed = () => {
-    return this.isCheckedToday === false;
+    return this.today !== todayInfo.date && this.isCheckedToday === false;
   };
 
   resetChallenge = () => {
@@ -25,8 +31,26 @@ export default class Challenge {
     this.challengePeriod = CHALLENGE_CICLE[0];
   };
 
-  initForToday = () => {
-    this.today = todayInfo.date;
-    if (this.today !== todayInfo.date) this.isCheckedToday = false;
+  isSuccess = () => {
+    const startDate = splitDateBySlash(this.startDate).at(-1);
+    const lastDateOfMonth = getLastDateOfMonth(
+      todayInfo.year,
+      todayInfo.month - 1,
+    );
+
+    let period = todayInfo.date - this.challengePeriod;
+    if (period < 0) {
+      period += lastDateOfMonth;
+    }
+    return period === startDate;
+  };
+
+  goToNextChallenge = () => {
+    if (this.challengePeriod === CHALLENGE_CICLE.at(-1)) {
+      this.challengePeriod = CHALLENGE_CICLE[0];
+    } else {
+      const cicleIndex = CHALLENGE_CICLE.indexOf(this.challengePeriod);
+      this.challengePeriod = CHALLENGE_CICLE[cicleIndex + 1];
+    }
   };
 }
