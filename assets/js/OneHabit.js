@@ -49,7 +49,6 @@ export default class OneHabit {
 
   handleEnrollButtonClick = e => {
     e.preventDefault();
-    console.log(e.target, ENROLL_FORM_CLASSNAME.ENROLL_BUTTON);
     if (e.target.className === ENROLL_FORM_CLASSNAME.ENROLL_BUTTON) {
       const inputs = document.querySelectorAll(
         `.${ENROLL_FORM_CLASSNAME.ENROLL_INPUT}`,

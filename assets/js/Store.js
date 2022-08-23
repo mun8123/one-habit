@@ -1,9 +1,10 @@
 import { STORAGE_KEY } from './constant/constant.js';
+import Habit from './domain/Habit.js';
 
 export default class Store {
   constructor() {
     this.storage = window.localStorage;
-    this.data = this.getData();
+    this.data = this.getData() || new Habit();
     this.observers = [];
   }
 
@@ -20,7 +21,7 @@ export default class Store {
     this.observers.push(observer);
   };
 
-  updateData = (newData) => {
+  updateData = newData => {
     this.setData(newData);
     this.data = this.getData();
     this.observers.forEach(observer => observer(this.data));
