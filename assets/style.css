@@ -1,5 +1,10 @@
 @charset 'utf-8';
-@import url(//fonts.googleapis.com/earlyaccess/notosanskr.css);
+@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://cdn.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
 
 :root {
   --off-white: #F5F5F5;
@@ -7,16 +12,12 @@
   --gray: #E2E2E2
 }
 
-.notosanskr * { 
- font-family: 'Noto Sans KR', sans-serif;
-}
-
 * {
   box-sizing: border-box;
   margin:0;
   padding: 0;
   border: 0;
-  font-family: 'Noto Sans KR', sans-serif;
+  font-family: 'Pretendard-Regular';
 }
 
 input:focus {
