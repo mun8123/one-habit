@@ -42,6 +42,8 @@ export default class OneHabit {
   };
 
   init = () => {
+    this.store.subscribe(this.update);
+
     if (this.store.data.isDefault) {
       this.setGreetingPage();
       return;
@@ -49,7 +51,6 @@ export default class OneHabit {
     this.setHabitTrackerPage();
 
     this.oneHabitData.initForToday();
-    this.store.subscribe(this.update);
     this.store.updateData(this.oneHabitData);
   };
 
@@ -64,9 +65,9 @@ export default class OneHabit {
     this.page.clear();
     this.page.render(this.page.trackerPageTemplate, this.oneHabitData);
   };
-
+  
   enroll = newOneHabitData => {
-    if (this.oneHabitData.isDefault) {
+    if (this.store.data.isDefault) {
       delete this.oneHabitData.isDefault;
     }
     this.store.updateData(newOneHabitData);

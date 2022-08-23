@@ -23,6 +23,6 @@ export default class Store {
   updateData = newData => {
     this.setData(newData);
     this.data = this.getData();
-    this.observers.forEach(observer => observer(this.data));
+    this.observers.forEach(observer => observer());
   };
 }
