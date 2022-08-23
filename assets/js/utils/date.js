@@ -31,8 +31,6 @@ export const calculateDate = (year, month, currentDate) => {
 };
 
 export const reduceDateToString = dateInArray => {
-  return dateInArray.reduce(
-    (DateOfItem, dateInfo) => (DateOfItem += dateInfo),
-    '',
-  );
+  const [month, date] = dateInArray;
+  return month + '/' + date;
 };
