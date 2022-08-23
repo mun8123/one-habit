@@ -6,18 +6,18 @@ export const ENROLL_FORM_CLASSNAME = {
 
 export const ENROLL_FORM = {
   title: {
-    idName: 'habit-title',
+    idName: 'enroll-input-title',
     label: '습관',
     isRequired: true,
   },
   options: {
     time: {
-      idName: 'habit-option-time',
+      idName: 'enroll-input-time',
       label: '시간',
       isRequired: false,
     },
     location: {
-      idName: 'habit-option-location',
+      idName: 'enroll-input-location',
       label: '장소',
       isRequired: false,
     },

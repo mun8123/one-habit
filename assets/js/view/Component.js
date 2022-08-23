@@ -23,13 +23,13 @@ export const HabitEnrollInput = elementData => {
   const placeholder = isRequired
     ? PLACEHOLDER.requiredInput
     : PLACEHOLDER.optionalInput;
-  return Element.Input(
+  return `<div class="${ENROLL_FORM_CLASSNAME.ENROLL_INPUT}">
+  ${Element.Input(
     idName,
-    ENROLL_FORM_CLASSNAME.ENROLL_INPUT,
     label,
     placeholder,
     isRequired,
-  );
+  )}</div>`;
 };
 
 export const HabitEnrollForm = () => {
