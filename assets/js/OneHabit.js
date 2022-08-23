@@ -20,6 +20,7 @@ export default class OneHabit {
     this.handlerBundle = {
       enrollButtonClick: this.handleEnrollButtonClick,
       checkButtonClick: this.handleCheckButtonClick,
+      enrollFormOpenButtonClick: this.handleEnrollFormOpenButtonClick,
     };
 
     this.init();
@@ -88,6 +89,12 @@ export default class OneHabit {
         location: location,
       },
     });
+  };
+
+  handleEnrollFormOpenButtonClick = ({ target }) => {
+    if (target.className === CLASSNAME.enrollFormOpenButton) {
+      document.querySelector('.dim').style.display = 'block';
+    }
   };
 
   handleEnrollButtonClick = e => {

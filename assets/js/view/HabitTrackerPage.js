@@ -49,6 +49,7 @@ export default class HabitTrackerPage {
     this.App.addEventListener('click', e => {
       handlerBundle.enrollButtonClick(e);
       handlerBundle.checkButtonClick(e);
+      handlerBundle.enrollFormOpenButtonClick(e);
     });
   };
 }
