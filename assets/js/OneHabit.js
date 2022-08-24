@@ -1,5 +1,5 @@
 import Store from './model/Store.js';
-import HabitTrackerPage from './view/HabitTrackerPage.js';
+import OneHabitPages from './view/OneHabitPages.js';
 import Habit from './domain/Habit.js';
 import OneHabitData from './model/OneHabitData.js';
 import { ENROLL_FORM_CLASSNAME } from './constant/HabitEnrollFormConstant.js';
@@ -11,7 +11,7 @@ defaultData.isDefault = true;
 export default class OneHabit {
   constructor() {
     this.store = new Store(defaultData);
-    this.page = new HabitTrackerPage();
+    this.page = new OneHabitPages();
     this.oneHabitData = new OneHabitData(
       this.store.data.habit,
       this.store.data.challenge,
@@ -65,7 +65,7 @@ export default class OneHabit {
     this.page.clear();
     this.page.render(this.page.trackerPageTemplate, this.oneHabitData);
   };
-  
+
   enroll = newOneHabitData => {
     if (this.store.data.isDefault) {
       delete this.oneHabitData.isDefault;

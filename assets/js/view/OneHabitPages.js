@@ -5,7 +5,7 @@ import {
   CLASSNAME,
 } from '../constant/constant.js';
 
-export default class HabitTrackerPage {
+export default class OneHabitPages {
   constructor() {
     this.App = document.querySelector('#App');
   }
