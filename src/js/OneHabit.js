@@ -1,7 +1,7 @@
-import Store from './model/Store.js';
+import OneHabitStore from './store/OneHabitStore.js';
 import OneHabitPages from './view/OneHabitPages.js';
 import Habit from './domain/Habit.js';
-import OneHabitData from './model/OneHabitData.js';
+import OneHabitData from './store/OneHabitData.js';
 import { ENROLL_FORM_CLASSNAME } from './constant/HabitEnrollFormConstant.js';
 import { CLASSNAME } from './constant/constant.js';
 
@@ -10,7 +10,7 @@ defaultData.isDefault = true;
 
 export default class OneHabit {
   constructor() {
-    this.store = new Store(defaultData);
+    this.store = new OneHabitStore(defaultData);
     this.page = new OneHabitPages();
     this.oneHabitData = new OneHabitData(
       this.store.data.habit,

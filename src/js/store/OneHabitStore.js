@@ -1,6 +1,6 @@
 import { STORAGE_KEY } from '../constant/constant.js';
 
-export default class Store {
+export default class OneHabitStore {
   constructor(defaultData) {
     this.storage = window.localStorage;
     this.data = this.getData() || defaultData;
