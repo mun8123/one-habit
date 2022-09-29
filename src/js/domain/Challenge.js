@@ -32,17 +32,17 @@ export default class Challenge {
   };
 
   isSuccess = () => {
-    const startDate = splitDateBySlash(this.startDate).at(-1);
+    const habitStartDate = splitDateBySlash(this.startDate).at(-1);
     const lastDateOfMonth = getLastDateOfMonth(
       todayInfo.year,
       todayInfo.month - 1,
     );
 
-    let period = todayInfo.date - this.challengePeriod;
-    if (period < 0) {
-      period += lastDateOfMonth;
+    let estimatedStartDate = todayInfo.date - this.challengePeriod;
+    if (estimatedStartDate < 0) {
+      estimatedStartDate += lastDateOfMonth;
     }
-    return period === startDate;
+    return estimatedStartDate === habitStartDate;
   };
 
   goToNextChallenge = () => {
