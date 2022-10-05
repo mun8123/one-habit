@@ -19,5 +19,5 @@ export const Input = (
 ) => {
   const requiredAttribute = isRequired ? 'required' : '';
   return `<label for="${idName}">${label}</label>
-    <input id="${idName}" class="${className}" type="text" placeholder="${placeholder}" ${requiredAttribute}></input>`;
+    <input id="${idName}" class="${className}" type="text" placeholder="${placeholder}" ${requiredAttribute} />`;
 };

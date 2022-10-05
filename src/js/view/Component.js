@@ -47,7 +47,7 @@ export const HabitEnrollForm = () => {
       )}
       <input class="${
         ENROLL_FORM_CLASSNAME.ENROLL_BUTTON
-      }" type="submit" value="등록">
+      }" type="submit" value="등록" />
     </form>
   </div>`;
 };
